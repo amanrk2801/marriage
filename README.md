@@ -922,5 +922,3 @@ If you find this project helpful, please consider giving it a star! ⭐
 **Made with ❤️ for helping people find their perfect match!**
 
 **Happy Coding! 🚀**
-#   m a r r i a g e  
- 
