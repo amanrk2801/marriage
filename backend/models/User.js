@@ -71,6 +71,26 @@ const userSchema = new mongoose.Schema({
     type: Boolean,
     default: false
   },
+  isPremium: {
+    type: Boolean,
+    default: false
+  },
+  profilePublished: {
+    type: Boolean,
+    default: false
+  },
+  paymentStatus: {
+    type: String,
+    enum: ['pending', 'completed', 'failed'],
+    default: 'pending'
+  },
+  paymentDetails: {
+    orderId: String,
+    paymentId: String,
+    amount: Number,
+    currency: String,
+    paidAt: Date
+  },
   createdAt: {
     type: Date,
     default: Date.now

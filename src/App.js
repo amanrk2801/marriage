@@ -12,6 +12,7 @@ import SuccessStories from './components/SuccessStories';
 import Notifications from './components/Notifications';
 import Messages from './components/Messages';
 import Interests from './components/Interests';
+import Payment from './components/Payment';
 import Footer from './components/Footer';
 
 function App() {
@@ -43,10 +44,15 @@ function App() {
         if (response.data.success) {
           setIsLoggedIn(true);
           setCurrentUser(response.data.user);
+          console.log('User session restored:', response.data.user.name);
         }
       } catch (error) {
         console.error('Session check failed:', error);
-        localStorage.removeItem('token');
+        // Only remove token if it's actually invalid (401)
+        if (error.response?.status === 401) {
+          localStorage.removeItem('token');
+          console.log('Token expired. Please login again.');
+        }
       }
     }
     setLoading(false);
@@ -101,7 +107,9 @@ function App() {
     setIsLoggedIn(false);
     setCurrentUser(null);
     setShortlistedProfiles([]);
+    setNotificationCount(0);
     setCurrentPage('search');
+    console.log('User logged out successfully');
   };
 
   const handleUpdateProfile = async (updatedData) => {
@@ -231,6 +239,18 @@ function App() {
 
       {currentPage === 'interests' && (
         <Interests isLoggedIn={isLoggedIn} currentUser={currentUser} />
+      )}
+
+      {currentPage === 'payment' && (
+        <Payment 
+          isLoggedIn={isLoggedIn} 
+          currentUser={currentUser}
+          onPaymentSuccess={() => {
+            // Refresh user data after payment
+            checkExistingSession();
+            setCurrentPage('search');
+          }}
+        />
       )}
 
       <Footer />

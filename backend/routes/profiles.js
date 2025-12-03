@@ -11,7 +11,9 @@ router.get('/', async (req, res) => {
     const { gender, ageMin, ageMax, religion, caste, location, page = 1, limit = 6 } = req.query;
 
     // Build filter query
-    const filter = {};
+    const filter = {
+      profilePublished: true // Only show published profiles
+    };
     
     if (gender && gender !== 'all' && gender !== 'undefined') {
       filter.gender = gender;

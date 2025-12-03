@@ -63,6 +63,15 @@ function Header({ currentPage, setCurrentPage, shortlistCount, isLoggedIn, curre
           
           {isLoggedIn ? (
             <>
+              {!currentUser?.profilePublished && (
+                <button 
+                  className="publish-btn"
+                  onClick={() => setCurrentPage('payment')}
+                  title="Publish your profile"
+                >
+                  🚀 Publish Profile
+                </button>
+              )}
               <div 
                 className="user-info" 
                 onClick={() => setCurrentPage('profile')}

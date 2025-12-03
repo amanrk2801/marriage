@@ -28,10 +28,10 @@ api.interceptors.request.use(
 api.interceptors.response.use(
   (response) => response,
   (error) => {
+    // Don't auto-redirect on 401 - let components handle it
+    // This prevents unwanted redirects when user is already logged in
     if (error.response?.status === 401) {
-      // Token expired or invalid
-      localStorage.removeItem('token');
-      window.location.href = '/login';
+      console.log('Authentication error:', error.response?.data?.message || 'Unauthorized');
     }
     return Promise.reject(error);
   }
@@ -93,6 +93,15 @@ export const uploadAPI = {
 export const profileViewAPI = {
   recordView: (viewedUserId) => api.post('/profile-views', { viewedUserId }),
   getMyViews: () => api.get('/profile-views/my-views')
+};
+
+// Payment APIs
+export const paymentAPI = {
+  createOrder: () => api.post('/payment/create-order'),
+  verifyPayment: (razorpay_order_id, razorpay_payment_id, razorpay_signature) => 
+    api.post('/payment/verify', { razorpay_order_id, razorpay_payment_id, razorpay_signature }),
+  getStatus: () => api.get('/payment/status'),
+  getHistory: () => api.get('/payment/history')
 };
 
 // Helper to get full image URL
