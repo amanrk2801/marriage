@@ -12,8 +12,7 @@ router.get('/', async (req, res) => {
 
     // Build filter query
     const filter = {
-      // MVP: Show all profiles (uncomment below line when enabling payment)
-      // profilePublished: true
+      profilePublished: true // Only show published profiles
     };
     
     if (gender && gender !== 'all' && gender !== 'undefined') {

@@ -15,7 +15,6 @@ const notificationRoutes = require('./routes/notifications');
 const uploadRoutes = require('./routes/upload');
 const profileViewRoutes = require('./routes/profileViews');
 const paymentRoutes = require('./routes/payment');
-const idVerificationRoutes = require('./routes/idVerification');
 
 const app = express();
 
@@ -44,7 +43,6 @@ app.use('/api/notifications', notificationRoutes);
 app.use('/api/upload', uploadRoutes);
 app.use('/api/profile-views', profileViewRoutes);
 app.use('/api/payment', paymentRoutes);
-app.use('/api/id-verification', idVerificationRoutes);
 
 // Health check route
 app.get('/api/health', (req, res) => {

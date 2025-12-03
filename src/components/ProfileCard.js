@@ -46,14 +46,7 @@ function ProfileCard({ profile, onViewProfile, onAddToShortlist, isShortlisted, 
           )}
         </div>
         <div className="profile-info">
-          <h3>
-            {profile.name}
-            {profile.idVerified && (
-              <span className="verified-badge" title="ID Verified - Trusted Profile">
-                ✓
-              </span>
-            )}
-          </h3>
+          <h3>{profile.name}</h3>
           <p className="profile-age">{profile.age} years</p>
           <div className="profile-details">
             <p><strong>Height:</strong> {profile.height}</p>

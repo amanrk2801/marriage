@@ -42,14 +42,7 @@ function ProfileView({ profile, onClose, onAddToShortlist, isShortlisted, isLogg
               )}
             </div>
             <div className="profile-view-basic">
-              <h2>
-                {profile.name}
-                {profile.idVerified && (
-                  <span className="verified-badge-large" title="ID Verified - Trusted Profile">
-                    ✓ Verified
-                  </span>
-                )}
-              </h2>
+              <h2>{profile.name}</h2>
               <p className="profile-id">Profile ID: {profile.id}00{profile.age}</p>
               <p className="profile-status">✓ Verified Profile</p>
             </div>

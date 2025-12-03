@@ -71,27 +71,18 @@ const userSchema = new mongoose.Schema({
     type: Boolean,
     default: false
   },
-  idVerified: {
-    type: Boolean,
-    default: false
-  },
-  idVerifiedAt: Date,
-  idVerificationType: {
-    type: String,
-    enum: ['pan', 'driving_license', 'voter_id', 'passport', 'aadhaar']
-  },
   isPremium: {
     type: Boolean,
     default: false
   },
   profilePublished: {
     type: Boolean,
-    default: true  // MVP: Auto-publish all profiles (change to false when enabling payment)
+    default: false
   },
   paymentStatus: {
     type: String,
     enum: ['pending', 'completed', 'failed'],
-    default: 'pending'  // MVP: Not enforced (enforce when enabling payment)
+    default: 'pending'
   },
   paymentDetails: {
     orderId: String,

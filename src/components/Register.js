@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import './Login.css';
 import { authAPI } from '../services/api';
-import IDVerification from './IDVerification';
 
 function Register({ onSwitchToLogin, onClose, onRegister }) {
   const [formData, setFormData] = useState({
@@ -18,8 +17,6 @@ function Register({ onSwitchToLogin, onClose, onRegister }) {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const [loading, setLoading] = useState(false);
-  const [showIDVerification, setShowIDVerification] = useState(false);
-  const [registeredUser, setRegisteredUser] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -46,12 +43,10 @@ function Register({ onSwitchToLogin, onClose, onRegister }) {
         // Store token
         localStorage.setItem('token', response.data.token);
         
-        setSuccess('Registration successful!');
-        setRegisteredUser(response.data.user);
-        
-        // Show ID verification after 1 second
+        setSuccess('Registration successful! Logging you in...');
+
         setTimeout(() => {
-          setShowIDVerification(true);
+          onRegister(response.data.user);
         }, 1000);
       }
     } catch (err) {
@@ -67,25 +62,6 @@ function Register({ onSwitchToLogin, onClose, onRegister }) {
       [e.target.name]: e.target.value
     });
   };
-
-  const handleIDVerificationComplete = () => {
-    setShowIDVerification(false);
-    onRegister(registeredUser);
-  };
-
-  const handleSkipID = () => {
-    setShowIDVerification(false);
-    onRegister(registeredUser);
-  };
-
-  if (showIDVerification) {
-    return (
-      <IDVerification 
-        onVerificationComplete={handleIDVerificationComplete}
-        onSkip={handleSkipID}
-      />
-    );
-  }
 
   return (
     <div className="auth-page">

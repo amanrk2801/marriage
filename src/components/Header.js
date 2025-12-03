@@ -63,8 +63,7 @@ function Header({ currentPage, setCurrentPage, shortlistCount, isLoggedIn, curre
           
           {isLoggedIn ? (
             <>
-              {/* MVP: Payment disabled - Uncomment below when enabling payment */}
-              {/* {!currentUser?.profilePublished && (
+              {!currentUser?.profilePublished && (
                 <button 
                   className="publish-btn"
                   onClick={() => setCurrentPage('payment')}
@@ -72,7 +71,7 @@ function Header({ currentPage, setCurrentPage, shortlistCount, isLoggedIn, curre
                 >
                   🚀 Publish Profile
                 </button>
-              )} */}
+              )}
               <div 
                 className="user-info" 
                 onClick={() => setCurrentPage('profile')}

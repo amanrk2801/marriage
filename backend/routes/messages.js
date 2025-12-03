@@ -18,8 +18,6 @@ router.post('/', auth, async (req, res) => {
       });
     }
 
-    // MVP: Allow all messaging (uncomment below when enabling interest-based messaging)
-    /*
     // Check if there's a mutual accepted interest
     const Interest = require('../models/Interest');
     const mutualInterest = await Interest.findOne({
@@ -35,7 +33,6 @@ router.post('/', auth, async (req, res) => {
         message: 'You can only message users who have accepted your interest or whose interest you have accepted'
       });
     }
-    */
 
     const message = new Message({
       from: req.userId,
