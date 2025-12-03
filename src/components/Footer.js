@@ -29,8 +29,7 @@ function Footer({ setCurrentPage }) {
             <h4>Quick Links</h4>
             <ul>
               <li><a href="#search" onClick={(e) => handleNavigation(e, 'search')}>Search Profiles</a></li>
-              <li><a href="#register" onClick={(e) => handleNavigation(e, 'register')}>Register Free</a></li>
-              <li><a href="#login" onClick={(e) => handleNavigation(e, 'login')}>Login</a></li>
+              <li><a href="#matches" onClick={(e) => handleNavigation(e, 'matches')}>Matches</a></li>
               <li><a href="#success" onClick={(e) => handleNavigation(e, 'success')}>Success Stories</a></li>
               <li><a href="#help" onClick={(e) => handleNavigation(e, 'help')}>Help & Support</a></li>
             </ul>
