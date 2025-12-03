@@ -13,6 +13,12 @@ import Notifications from './components/Notifications';
 import Messages from './components/Messages';
 import Interests from './components/Interests';
 import Payment from './components/Payment';
+import AboutUs from './components/AboutUs';
+import PrivacyPolicy from './components/PrivacyPolicy';
+import TermsConditions from './components/TermsConditions';
+import ContactUs from './components/ContactUs';
+import FAQ from './components/FAQ';
+import HelpSupport from './components/HelpSupport';
 import Footer from './components/Footer';
 
 function App() {
@@ -253,7 +259,14 @@ function App() {
         />
       )}
 
-      <Footer />
+      {currentPage === 'about' && <AboutUs />}
+      {currentPage === 'privacy' && <PrivacyPolicy />}
+      {currentPage === 'terms' && <TermsConditions />}
+      {currentPage === 'contact' && <ContactUs />}
+      {currentPage === 'faq' && <FAQ />}
+      {currentPage === 'help' && <HelpSupport />}
+
+      <Footer setCurrentPage={setCurrentPage} />
     </div>
   );
 }
