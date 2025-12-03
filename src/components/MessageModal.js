@@ -12,7 +12,12 @@ function MessageModal({ profile, onClose, isLoggedIn, onNavigateToLogin, onNavig
 
   useEffect(() => {
     if (isLoggedIn) {
-      checkMessagingPermission();
+      // MVP: Skip permission check - allow all messaging
+      setCanMessage(true);
+      setChecking(false);
+      
+      // Uncomment below when enabling interest-based messaging
+      // checkMessagingPermission();
     }
   }, [isLoggedIn]);
 

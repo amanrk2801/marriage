@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './ProfileSettings.css';
 import { uploadAPI, getImageUrl, authAPI } from '../services/api';
+import IDVerification from './IDVerification';
 
 function ProfileSettings({ currentUser, onUpdateProfile }) {
   const [isEditing, setIsEditing] = useState(false);
@@ -9,6 +10,7 @@ function ProfileSettings({ currentUser, onUpdateProfile }) {
   const [loading, setLoading] = useState(true);
   const [userData, setUserData] = useState(null);
   const [profileImage, setProfileImage] = useState(null);
+  const [showIDVerification, setShowIDVerification] = useState(false);
   const fileInputRef = useRef(null);
   
   const [formData, setFormData] = useState({
@@ -243,6 +245,34 @@ function ProfileSettings({ currentUser, onUpdateProfile }) {
     setIsEditing(false);
   };
 
+  const handleIDVerificationComplete = async () => {
+    setShowIDVerification(false);
+    setSuccess('ID verification submitted! Our team will review it within 24-48 hours.');
+    // Refresh user data
+    try {
+      const response = await authAPI.getCurrentUser();
+      if (response.data.success) {
+        setUserData(response.data.user);
+      }
+    } catch (error) {
+      console.error('Failed to refresh user data:', error);
+    }
+  };
+
+  const handleSkipID = () => {
+    setShowIDVerification(false);
+  };
+
+  // Show ID verification modal
+  if (showIDVerification) {
+    return (
+      <IDVerification 
+        onVerificationComplete={handleIDVerificationComplete}
+        onSkip={handleSkipID}
+      />
+    );
+  }
+
   // Show loading state
   if (loading) {
     return (
@@ -323,6 +353,51 @@ function ProfileSettings({ currentUser, onUpdateProfile }) {
                 {uploadError && <p className="upload-error">{uploadError}</p>}
               </div>
             </div>
+          </section>
+
+          {/* ID Verification Section */}
+          <section className="settings-section">
+            <h3>🛡️ ID Verification</h3>
+            {userData?.idVerified ? (
+              <div className="aadhaar-verified-status">
+                <div className="verified-icon">✓</div>
+                <div className="verified-info">
+                  <h4>Your profile is ID verified</h4>
+                  <p>Verified on {new Date(userData.idVerifiedAt).toLocaleDateString()}</p>
+                  <p className="id-type-badge">Verified with: {userData.idVerificationType?.toUpperCase().replace('_', ' ')}</p>
+                  <div className="verification-benefits">
+                    <span className="benefit-badge">🎯 5x Higher Visibility</span>
+                    <span className="benefit-badge">💚 Trusted Profile</span>
+                    <span className="benefit-badge">⭐ More Responses</span>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <div className="aadhaar-unverified-status">
+                <div className="warning-icon">⚠️</div>
+                <div className="unverified-info">
+                  <h4>Verify your profile with Government ID</h4>
+                  <p>Get more visibility and build trust with verified members</p>
+                  <ul className="verification-benefits-list">
+                    <li>✓ Prevent fake profiles - One ID = One Profile</li>
+                    <li>✓ Increase profile visibility by 5x</li>
+                    <li>✓ Get priority in search results</li>
+                    <li>✓ Build trust with genuine members</li>
+                    <li>✓ Free verification - No cost!</li>
+                  </ul>
+                  <div className="accepted-ids-small">
+                    <strong>Accepted IDs:</strong> PAN Card, Driving License, Voter ID, Passport, Aadhaar
+                  </div>
+                  <button 
+                    type="button"
+                    className="verify-aadhaar-btn"
+                    onClick={() => setShowIDVerification(true)}
+                  >
+                    🆔 Verify with Government ID Now
+                  </button>
+                </div>
+              </div>
+            )}
           </section>
 
           {/* Basic Information */}
