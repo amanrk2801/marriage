@@ -1,69 +1,53 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './Header.css';
 
 function Header({ currentPage, setCurrentPage, shortlistCount, isLoggedIn, currentUser, onLogout, notificationCount }) {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
-  const handleNavigation = (page) => {
-    setCurrentPage(page);
-    setMobileMenuOpen(false);
-  };
-
   return (
     <header className="header">
       <div className="header-container">
-        <div className="logo" onClick={() => handleNavigation('search')} style={{ cursor: 'pointer' }}>
+        <div className="logo" onClick={() => setCurrentPage('search')} style={{ cursor: 'pointer' }}>
           <h1>💑 MatrimonyHub</h1>
         </div>
-        
-        <button 
-          className="mobile-menu-btn"
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          aria-label="Toggle menu"
-        >
-          {mobileMenuOpen ? '✕' : '☰'}
-        </button>
-
-        <nav className={`nav ${mobileMenuOpen ? 'mobile-open' : ''}`}>
+        <nav className="nav">
           <a 
             href="#search" 
             className={currentPage === 'search' ? 'active' : ''}
-            onClick={(e) => { e.preventDefault(); handleNavigation('search'); }}
+            onClick={(e) => { e.preventDefault(); setCurrentPage('search'); }}
           >
             Search
           </a>
           <a 
             href="#shortlisted" 
             className={currentPage === 'shortlisted' ? 'active' : ''}
-            onClick={(e) => { e.preventDefault(); handleNavigation('shortlisted'); }}
+            onClick={(e) => { e.preventDefault(); setCurrentPage('shortlisted'); }}
           >
             Shortlisted
           </a>
           <a 
             href="#matches" 
             className={currentPage === 'matches' ? 'active' : ''}
-            onClick={(e) => { e.preventDefault(); handleNavigation('matches'); }}
+            onClick={(e) => { e.preventDefault(); setCurrentPage('matches'); }}
           >
             Matches
           </a>
           <a 
             href="#interests" 
             className={currentPage === 'interests' ? 'active' : ''}
-            onClick={(e) => { e.preventDefault(); handleNavigation('interests'); }}
+            onClick={(e) => { e.preventDefault(); setCurrentPage('interests'); }}
           >
             Interests
           </a>
           <a 
             href="#messages" 
             className={currentPage === 'messages' ? 'active' : ''}
-            onClick={(e) => { e.preventDefault(); handleNavigation('messages'); }}
+            onClick={(e) => { e.preventDefault(); setCurrentPage('messages'); }}
           >
             Messages
           </a>
           <a 
             href="#notifications" 
             className={currentPage === 'notifications' ? 'active' : ''}
-            onClick={(e) => { e.preventDefault(); handleNavigation('notifications'); }}
+            onClick={(e) => { e.preventDefault(); setCurrentPage('notifications'); }}
             style={{ position: 'relative' }}
           >
             Notifications
@@ -72,7 +56,7 @@ function Header({ currentPage, setCurrentPage, shortlistCount, isLoggedIn, curre
           <a 
             href="#success" 
             className={currentPage === 'success' ? 'active' : ''}
-            onClick={(e) => { e.preventDefault(); handleNavigation('success'); }}
+            onClick={(e) => { e.preventDefault(); setCurrentPage('success'); }}
           >
             Success Stories
           </a>
@@ -83,7 +67,7 @@ function Header({ currentPage, setCurrentPage, shortlistCount, isLoggedIn, curre
               {/* {!currentUser?.profilePublished && (
                 <button 
                   className="publish-btn"
-                  onClick={() => handleNavigation('payment')}
+                  onClick={() => setCurrentPage('payment')}
                   title="Publish your profile"
                 >
                   🚀 Publish Profile
@@ -91,7 +75,7 @@ function Header({ currentPage, setCurrentPage, shortlistCount, isLoggedIn, curre
               )} */}
               <div 
                 className="user-info" 
-                onClick={() => handleNavigation('profile')}
+                onClick={() => setCurrentPage('profile')}
                 style={{ cursor: 'pointer' }}
                 title="View Profile"
               >
@@ -100,10 +84,7 @@ function Header({ currentPage, setCurrentPage, shortlistCount, isLoggedIn, curre
               </div>
               <button 
                 className="logout-btn"
-                onClick={() => {
-                  onLogout();
-                  setMobileMenuOpen(false);
-                }}
+                onClick={onLogout}
               >
                 Logout
               </button>
@@ -111,7 +92,7 @@ function Header({ currentPage, setCurrentPage, shortlistCount, isLoggedIn, curre
           ) : (
             <button 
               className="login-btn"
-              onClick={() => handleNavigation('login')}
+              onClick={() => setCurrentPage('login')}
             >
               Login
             </button>
