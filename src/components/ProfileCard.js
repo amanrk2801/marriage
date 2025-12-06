@@ -3,7 +3,7 @@ import './ProfileCard.css';
 import InterestModal from './InterestModal';
 import { getImageUrl } from '../services/api';
 
-function ProfileCard({ profile, onViewProfile, onAddToShortlist, isShortlisted, isLoggedIn, onNavigateToLogin, onNavigateToRegister }) {
+function ProfileCard({ profile, onViewProfile, onAddToShortlist, isShortlisted, isLoggedIn, onNavigateToLogin, onNavigateToRegister, priority = false }) {
   const [showInterestModal, setShowInterestModal] = useState(false);
   const [imageError, setImageError] = useState(false);
 
@@ -40,6 +40,8 @@ function ProfileCard({ profile, onViewProfile, onAddToShortlist, isShortlisted, 
               alt={profile.name}
               className="profile-photo"
               onError={() => setImageError(true)}
+              loading={priority ? "eager" : "lazy"}
+              fetchPriority={priority ? "high" : "auto"}
             />
           ) : (
             <span className="emoji">{profile.image}</span>

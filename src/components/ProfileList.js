@@ -186,7 +186,7 @@ function ProfileList({ filters, onAddToShortlist, shortlistedIds, isLoggedIn, on
             </div>
           )}
           <div className="profiles-grid">
-            {profiles.map(profile => (
+            {profiles.map((profile, index) => (
               <ProfileCard 
                 key={profile.id} 
                 profile={profile} 
@@ -196,6 +196,7 @@ function ProfileList({ filters, onAddToShortlist, shortlistedIds, isLoggedIn, on
                 isLoggedIn={isLoggedIn}
                 onNavigateToLogin={onNavigateToLogin}
                 onNavigateToRegister={onNavigateToRegister}
+                priority={index < 4}
               />
             ))}
           </div>
