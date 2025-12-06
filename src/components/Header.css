@@ -27,6 +27,10 @@
   white-space: nowrap;
 }
 
+.hamburger {
+  display: none;
+}
+
 .nav {
   display: flex;
   gap: 20px;
@@ -208,6 +212,34 @@
 
   .logo h1 {
     font-size: 1.3rem;
+  }
+
+  .hamburger {
+    display: block;
+    cursor: pointer;
+    z-index: 101;
+  }
+
+  .bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px auto;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    background-color: #333;
+  }
+
+  .bar.open:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+
+  .bar.open:nth-child(2) {
+    opacity: 0;
+  }
+
+  .bar.open:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
   }
 
   .nav {
