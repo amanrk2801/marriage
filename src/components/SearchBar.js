@@ -48,12 +48,35 @@ function SearchBar({ filters, setFilters }) {
             <option value="all">All Castes</option>
             <option value="brahmin">Brahmin</option>
             <option value="rajput">Rajput</option>
-            <option value="patel">Patel</option>
-            <option value="reddy">Reddy</option>
-            <option value="khatri">Khatri</option>
+            <option value="maratha">Maratha</option>
+            <option value="patel">Patel (Patidar)</option>
             <option value="jat">Jat</option>
+            <option value="yadav">Yadav</option>
+            <option value="kayastha">Kayastha</option>
+            <option value="bania">Bania</option>
+            <option value="agarwal">Agarwal</option>
+            <option value="khatri">Khatri</option>
             <option value="vaishya">Vaishya</option>
+            <option value="kshatriya">Kshatriya</option>
+            <option value="kurmi">Kurmi</option>
+            <option value="gupta">Gupta</option>
+            <option value="arora">Arora</option>
+            <option value="saini">Saini</option>
+            <option value="gujjar">Gujjar</option>
+            <option value="lohar">Lohar</option>
+            <option value="kumhar">Kumhar</option>
+            <option value="mali">Mali</option>
+            <option value="sonar">Sonar</option>
+            <option value="vishwakarma">Vishwakarma</option>
+            <option value="nadar">Nadar</option>
+            <option value="ezhava">Ezhava</option>
+            <option value="reddy">Reddy</option>
+            <option value="kamma">Kamma</option>
+            <option value="naidu">Naidu</option>
+            <option value="vokkaliga">Vokkaliga</option>
+            <option value="lingayat">Lingayat</option>
             <option value="iyer">Iyer</option>
+            <option value="iyengar">Iyengar</option>
           </select>
 
           <input 
