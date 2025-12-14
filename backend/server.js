@@ -31,7 +31,8 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/matrimony
 .then(() => console.log('✅ MongoDB Connected Successfully'))
 .catch(err => console.error('❌ MongoDB Connection Error:', err));
 
-// Serve static files (uploaded images)
+// Serve static files (uploaded images) - Legacy support for old local images
+// New images are stored on Cloudinary, but keep this for existing local images
 app.use('/uploads', express.static('uploads'));
 
 // Routes
